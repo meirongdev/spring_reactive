@@ -1,5 +1,7 @@
 package dev.meirong.demos.webflux;
 
+import java.time.Duration;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -11,8 +13,11 @@ import reactor.core.publisher.Mono;
 @Component
 
 public class HelloWorldHandler {
+    
     public Mono<ServerResponse> hello(ServerRequest request) {
-        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromValue("Hello, Spring WebFlux!"));
+        return Mono.delay(Duration.ofMillis(500))
+                .flatMap(aLong -> ServerResponse.ok()
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .body(BodyInserters.fromValue("Hello, Spring WebFlux!")));
     }
 }
