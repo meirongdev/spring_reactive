@@ -1,0 +1,21 @@
+# mysql
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: webflux_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: test_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+    networks:
+      - webflux_demo
+      
+
+networks:
+  webflux_demo:

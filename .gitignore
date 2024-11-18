@@ -35,3 +35,4 @@ build/
 ### tmp files
 data.txt
 uploads
+docker/mysql
