@@ -47,6 +47,7 @@ public class WebClientApp {
                         return Mono.error(new RuntimeException("Failed to fetch data"));
                     })
                     .bodyToMono(String.class)
+                    // onErrorResume handle the thrown exceptions.
                     .onErrorResume(error -> {
                         return Mono.just("Error occurred: " + error.getMessage());
                     });
