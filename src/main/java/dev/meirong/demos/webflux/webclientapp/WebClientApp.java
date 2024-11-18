@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +25,12 @@ public class WebClientApp {
     public class WebClientConfig {
         @Bean
         public WebClient webClient() {
-            return WebClient.create("https://jsonplaceholder.typicode.com"); // Example API base URL
+            // return WebClient.create("https://jsonplaceholder.typicode.com"); // Example API base URL
+            return WebClient.builder()
+                    .baseUrl("https://jsonplaceholder.typicode.com") // Example API base URL
+                    .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                    .defaultCookie("cookieKey", "cookieValue")
+                    .build();
         }
     }
 
@@ -36,7 +43,13 @@ public class WebClientApp {
             return webClient.get()
                     .uri("/posts/1") // Example API endpoint
                     .retrieve()
-                    .bodyToMono(String.class);
+                    .onStatus(httpStatus -> httpStatus.isError(), response -> {
+                        return Mono.error(new RuntimeException("Failed to fetch data"));
+                    })
+                    .bodyToMono(String.class)
+                    .onErrorResume(error -> {
+                        return Mono.just("Error occurred: " + error.getMessage());
+                    });
         }
     }
 
