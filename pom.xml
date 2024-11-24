@@ -122,4 +122,13 @@
 		</plugins>
 	</build>
 
+	<profiles>
+        <profile>
+            <id>webflux-helloworld</id>
+            <properties>
+                <start-class>dev.meirong.demos.webflux.helloworld.WebfluxApplication</start-class>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

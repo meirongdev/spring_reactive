@@ -36,3 +36,5 @@ build/
 data.txt
 uploads
 docker/mysql
+
+logs
