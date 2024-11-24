@@ -1,4 +1,4 @@
-package dev.meirong.demos.webflux;
+package dev.meirong.demos.webflux.realtimeapp;
 
 import java.time.Duration;
 

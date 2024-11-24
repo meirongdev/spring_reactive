@@ -1,4 +1,4 @@
-package dev.meirong.demos.webflux;
+package dev.meirong.demos.webflux.helloworld;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
