@@ -47,6 +47,11 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.projectreactor.tools</groupId>
+			<artifactId>blockhound</artifactId>
+			<version>1.0.10.RELEASE</version>
+		</dependency>
 
 		<!-- Spring Boot WebFlux Starter -->
 		<dependency>
